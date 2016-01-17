@@ -6,8 +6,9 @@
 		<link rel="stylesheet" href="style.css" type="text/css">
 		</head>
 	<body>
+		<!-- 6x6 Table -->
 		<table>
-			<caption>What do you with these foods?</caption>
+			<caption>What do you do with these foods?</caption>
 			<thead>
 				<tr>
 					<th>
@@ -61,14 +62,119 @@
 			</tfoot>
 		</table>
 
+		<!-- List -->
 		<ol>
 			<li>Cats
 			<li>Dogs
 			<li>Birds
 		</ol>
 
+		<!-- Divs -->
 		<div class="outer-content">
 			<div class="inner-content">Inner Div Content</div>
 		</div>
+
+		<!-- Form that submits via GET -->
+		<form action="http://classes.engr.oregonstate.edu/eecs/winter2015/cs290-400/tools/class-content/form_tests/check_request.php" method="get">
+			<fieldset>
+				<legend>Some GET Data</legend>
+
+				<fieldset>
+					<label>Text here:
+						<input type="text" name="text_input" maxlength="100">
+					</label>
+				</fieldset>
+				<br>
+
+				<fieldset>
+					<label>Number here:
+						<input type="number" name="numerical_input">
+					</label>
+				</fieldset>
+				<br>
+
+				<fieldset>
+					<label>Password here:
+						<input type="password" name="password_input" maxlength="100">
+					</label>
+				</fieldset>
+				<br>
+
+				<fieldset>
+					Select between:
+					<br>
+					<br>
+					<label>
+						<input type="radio" name="candy" value="snickers">Snickers
+					</label>
+					<br>
+					<br>
+					<label>
+						<input type="radio" name="candy" value="skittles">Skittles
+					</label>
+					<br>
+					<br>
+					<label>
+						<input type="radio" name="candy" value="mentos">Mentos
+					</label>
+					<br>
+					<br>
+
+					<input type="submit" value="Submit">
+				</fieldset>
+			</fieldset>
+		</form>
+		<br>
+
+		<!-- Form that submits via POST -->
+		<form action="http://classes.engr.oregonstate.edu/eecs/winter2015/cs290-400/tools/class-content/form_tests/check_request.php" method="post">
+			<fieldset>
+				<legend>Some POST Data</legend>
+
+				<fieldset>
+					<label>Text here:
+						<input type="text" name="text_input" maxlength="100">
+					</label>
+				</fieldset>
+				<br>
+
+				<fieldset>
+					<label>Number here:
+						<input type="number" name="numerical_input">
+					</label>
+				</fieldset>
+				<br>
+
+				<fieldset>
+					<label>Password here:
+						<input type="password" name="password_input" maxlength="100">
+					</label>
+				</fieldset>
+				<br>
+
+				<fieldset>
+					Select between:
+					<br>
+					<br>
+					<label>
+						<input type="radio" name="candy" value="snickers">Snickers
+					</label>
+					<br>
+					<br>
+					<label>
+						<input type="radio" name="candy" value="skittles">Skittles
+					</label>
+					<br>
+					<br>
+					<label>
+						<input type="radio" name="candy" value="mentos">Mentos
+					</label>
+					<br>
+					<br>
+
+					<input type="submit" value="Submit">
+				</fieldset>
+			</fieldset>
+		</form>
 	</body>
 </html>

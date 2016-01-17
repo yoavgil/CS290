@@ -1,3 +1,8 @@
+table, th, td {
+	border-style: solid;
+	border-width: 1px;
+}
+
 tbody th {
 	font-weight: normal;
 	font-style: italic;
@@ -19,3 +24,4 @@ tbody th {
 	top: 20px;
 	text-align: center;
 }
+
