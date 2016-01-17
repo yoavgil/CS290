@@ -3,3 +3,19 @@ tbody th {
 	font-style: italic;
 }
 
+.outer-content {
+	background-color: pink;
+	height: 60px;
+	width: 75%;
+	margin-top: 20px;
+}
+
+.inner-content {
+	background-color: blue;
+	height: 20px;
+	width: 75%;
+	margin: 0 auto;
+	position: relative;
+	top: 20px;
+	text-align: center;
+}
