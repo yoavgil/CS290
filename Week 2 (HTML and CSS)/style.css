@@ -8,6 +8,16 @@ tbody th {
 	font-style: italic;
 }
 
+tbody tr:nth-of-type(odd)
+{
+	background-color: fuchsia;
+}
+
+tbody tr:nth-of-type(even)
+{
+	background-color: aqua;
+}
+
 .outer-content {
 	background-color: pink;
 	height: 60px;
