@@ -50,7 +50,7 @@ function yearComparator( auto1, auto2){
 
 /*This compares two automobiles based on their make. It should be case insensitive and makes which are alphabetically earlier in the alphabet are "greater" than ones that come later.*/
 function makeComparator( auto1, auto2){
-    if (auto1.make > auto2.make){
+    if (auto1.make.toLowerCase() < auto2.make.toLowerCase()){
         return true;
     } else {
         return false;
@@ -59,7 +59,21 @@ function makeComparator( auto1, auto2){
 
 /*This compares two automobiles based on their type. The ordering from "greatest" to "least" is as follows: roadster, pickup, suv, wagon, (types not otherwise listed). It should be case insensitive. If two cars are of equal type then the newest one by model year should be considered "greater".*/
 function typeComparator( auto1, auto2){
-    /* your code here*/
+    if (auto1.type.toLowerCase() == auto2.type.toLowerCase()) return yearComparator(auto1, auto2);
+
+    if (auto1.type.toLowerCase() == "roadster") return true;
+    if (auto2.type.toLowerCase() == "roadster") return false;
+
+    if (auto1.type.toLowerCase() == "pickup") return true;
+    if (auto2.type.toLowerCase() == "pickup") return false;
+
+    if (auto1.type.toLowerCase() == "suv") return true;
+    if (auto2.type.toLowerCase() == "suv") return false;
+
+    if (auto1.type.toLowerCase() == "wagon") return true;
+    if (auto2.type.toLowerCase() == "wagon") return false;
+
+    return yearComparator(auto1, auto2);
 }
 
 /*Your program should output the following to the console.log, including the opening and closing 5 stars. All values in parenthesis should be replaced with appropriate values. Each line is a seperate call to console.log.
@@ -86,6 +100,7 @@ The cars sorted by type are:
 As an example of the content in the parenthesis:
 1990 Ford F-150 */
 
+
 /*If the argument is true this prints "year make model type", if false this prints "year make model"*/
 Automobile.prototype.logMe = function(printType) {
     var string = this.year + " " + this.make + " " + this.model;
@@ -95,8 +110,8 @@ Automobile.prototype.logMe = function(printType) {
     console.log(string);
 }
 
+/*This prints info for all automobiles in the array, and passes printType to logMe, which prints "type" if true*/
 function printAll(array, printType) {
-    var string = "";
     for (var i = 0; i < array.length; i++) {
         array[i].logMe(printType);
     }
@@ -112,7 +127,8 @@ arr = sortArr(makeComparator, automobiles);
 console.log("The cars sorted by make are:");
 printAll(arr, false);
 
-/*console.log();
+console.log();
 arr = sortArr(typeComparator, automobiles);
 console.log("The cars sorted by type are:");
-printAll(arr, true);*/
+printAll(arr, true);
+console.log("*****");
