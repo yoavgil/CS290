@@ -1,0 +1,24 @@
+<style>
+	th, td {
+		border: 1px solid black;
+	}
+</style>
+
+<h1>{{header}}</h1>
+{{#if dataList}}
+	<table>
+		<caption>Data Received</caption>
+			<thead>
+				<tr>
+					<th>Parameter
+					<th>Value
+			<tbody>
+				{{#each dataList}}
+					<tr>
+						<td>{{this.name}}
+						<td>{{this.value}}
+				{{/each}}
+	</table>
+{{else}}
+	<p>No data received</p>
+{{/if}}
