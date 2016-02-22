@@ -2,23 +2,44 @@
 	th, td {
 		border: 1px solid black;
 	}
+	caption {
+		white-space: nowrap;
+	}
 </style>
 
 <h1>{{header}}</h1>
-{{#if dataList}}
+{{#if urlData}}
 	<table>
-		<caption>Data Received</caption>
+		<caption>Data Received in URL Query String</caption>
 			<thead>
 				<tr>
 					<th>Parameter
 					<th>Value
 			<tbody>
-				{{#each dataList}}
+				{{#each urlData}}
 					<tr>
 						<td>{{this.name}}
 						<td>{{this.value}}
 				{{/each}}
 	</table>
 {{else}}
-	<p>No data received</p>
+	<p>No data received in URL query string.</p>
+{{/if}}
+{{#if bodyData}}
+	<br>
+	<table>
+		<caption>Data Received in Request Body</caption>
+			<thead>
+				<tr>
+					<th>Parameter
+					<th>Value
+			<tbody>
+				{{#each bodyData}}
+					<tr>
+						<td>{{this.name}}
+						<td>{{this.value}}
+				{{/each}}
+	</table>
+{{else}}
+	<p>No data received in request body.</p>
 {{/if}}

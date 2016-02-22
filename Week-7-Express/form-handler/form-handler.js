@@ -1,15 +1,32 @@
 var express = require("express");
-
 var app = express();
+
 var handlebars = require("express-handlebars").create({defaultLayout:"main"});
+
+var bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
 
 app.engine("handlebars", handlebars.engine);
 app.set("view engine", "handlebars");
 app.set("port", 3000);
 
-/*app.post("/", function(req, res) {
+app.post("/", function(req, res) {
+	var qParams = [];
+	for (var param in req.query) {
+		qParams.push({"name":param, "value":req.query[param]});
+	}
+	var context = {};
+	context.urlData = qParams;
 
-});*/
+	var bodyParams = [];
+	for (var param in req.body) {
+		bodyParams.push({"name":param, "value":req.body[param]});
+	}
+	context.bodyData = bodyParams;
+	context.header = "POST Request Received";
+	res.render("homepage", context);
+});
 
 app.get("/", function(req, res) {
 	var qParams = [];
@@ -17,7 +34,7 @@ app.get("/", function(req, res) {
 		qParams.push({"name":param, "value":req.query[param]});
 	}
 	var context = {};
-	context.dataList = qParams;
+	context.urlData = qParams;
 	context.header = "GET Request Received";
 	res.render("homepage", context);
 });
