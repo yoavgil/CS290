@@ -10,16 +10,40 @@ app.set("view engine", "handlebars");
 app.use(express.static("public"));
 app.set("port", 3000);
 
-//This function uses a request call, prints response body to console
-app.get("/", function(req, res) {
-	request("http://www.google.com", function (err, response, body) {
+//This function uses nested GET and POST calls
+app.get("/", function (req, res, next) {
+	context = {};
+
+	//Use GET call to display weather info
+	request("http://api.openweathermap.org/data/2.5/weather?q=corvallis&APPID=" + credentials.owmKey, function (err, response, body) {
 		if (!err && response.statusCode < 400) {
-			console.log(body); //This shows the HTML code for google.com in the console
-		} else {
+			context.owm = body;
+
+			//Use POST call to httpbin
+			request({
+				"url":"http://httpbin.org/post",
+				"method":"POST",
+				"headers": {"Content-Type":"application/json"},
+				"body": '{"foo":"bar", "number":1}' //json string
+			}, function (err, response, body) {
+				if (!err && response.statusCode < 400) {
+					context.httpbin = body;
+					res.render("httpRequest", context);
+				} else {
+					console.log(err);
+					if (response) {
+						console.log(response.statusCode);
+					}
+					next(err);
+				}
+			});
+		}
+		else {
+			console.log(err);
 			if (response) {
 				console.log(response.statusCode);
 			}
-		next(err);
+			next(err);
 		}
 	});
 });
