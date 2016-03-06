@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>How-To for New York Times Books API</title>
+		<link rel="stylesheet" href="stylesheet.css" type="text/css">
+	</head>
+	<body>
+		<div class="container">
+			<h1>Introduction: How to Use the New York Times Books API</h1>
+			<h3>by Yoav Gil</h3>
+
+			<h2>About the Books API</h2>
+			<p>The New York Times has an extensive amount of best seller lists and book reviews. They provide a free, public API to access this data. You can use this API to search through various best seller lists, or to look up review information for a particular book.</p>
+			<p>The following are important sources of information:</p>
+			<ul>
+				<li>Information about <a href="http://developer.nytimes.com/docs/books_api/">the NYT Books API</a>
+				<li>Information about <a href="http://developer.nytimes.com/">NYT APIs in general</a>
+				<li>A list of <a href="http://developer.nytimes.com/docs">all NYT APIs</a>
+			</ul>
+
+			<h2>Getting Started</h2>
+			<p>The first thing you want to do is <a href="http://developer.nytimes.com/apps/register">register for an API key</a>. You will need to create a free account first; once you are logged in, just return to this link. There, you can request keys for as many NYT APIs as you would like. Check the following box to request a Books API key:</p>
+			<img src="./newKey.jpg" alt="New NYT Books API Key">
+			<p>After you successfully create a key, you should see something like the following for each key you requested (with all the fields populated):</p>
+			<img src="./doneKey.jpg" alt="Created NYT Books API Key">
+			<p>Note that the NYT uses different API keys for each of their many APIs, so make sure you are using the correct key when you send a request. If you use the wrong key, your request will not work.</p>
+
+			<h2>Important Notes:</h2>
+			<p>For the examples in this guide, I am using <a href="https://nodejs.org/">Node.js</a> with the <a href="http://expressjs.com/">Express</a> module. You should be familiar with JavaScript to follow along with my examples. I am also using the <a href="https://www.npmjs.com/package/request">request module</a> to send API requests. It is critical that you include this module with the following line:</p>
+			<pre>var request = require('request');</pre>
+			<p>Also, I have saved my NYT Books API key as a string called <code>nytBooksKey</code> in a file called <code>credentials.js</code>. I therefore access my key using <code>credentials.nytBooksKey</code>. If you define your key in the same file that you perform your API calls, you do not need to access it using <code>credentials.nytBooksKey</code>; you can access it using whatever variable you defined.</p>
+		</div>
+	</body>
+</html>
