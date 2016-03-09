@@ -12,8 +12,31 @@ app.set("port", 3000);
 var bestSellersUrl = 'http://api.nytimes.com/svc/books/v3/lists';
 var reviewsUrl = 'http://api.nytimes.com/svc/books/v3/reviews';
 
+app.get("/all-lists", function (req, res, next) {
+	
 	//Get names of all the lists you can search for
-	//var url = bestSellersUrl + "/names";
+	var url = bestSellersUrl + "/names";
+	url += "?api-key=" + credentials.nytBooksKey;
+
+	request(url, function (err, response, body) {
+		if (!err && response.statusCode < 400) {
+			//This code just displays the response body
+			context = {};
+			context.data = body;
+			res.render("data", context);
+
+			//context = {}
+
+		} else {
+			console.log(err);
+			if (response) {
+				console.log(response.statusCode);
+			}
+			next(err);
+		}
+	});
+
+});
 
 app.get("/titles", function (req, res, next) {
 

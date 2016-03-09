@@ -25,6 +25,19 @@ p, ul {
 
 pre {
 	font-size: 16px;
+	background-color: #ebebe0;
+	border-radius: 6px;
+	padding: 4px;
+
+	/*white-space: normal;*/ /*doesn't work*/ 
+	/*word-break: break-all;*/ /*breaks words in the middle as well*/
+
+	overflow: auto;
+	
+	/*
+	word-wrap: break-word;
+	white-space: pre-wrap;
+	*/
 }
 
 code {

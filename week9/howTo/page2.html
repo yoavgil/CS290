@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>How-To for New York Times Books API</title>
+		<link rel="stylesheet" href="stylesheet.css" type="text/css">
+	</head>
+	<body>
+		<div class="container">
+			<h1>Best Seller Lists</h1>
+			<h2>Where to Send our GET Request</h2>
+			<p>To access information about best seller lists for the New York Times Books API, we need to send a GET request to the following URL (filling in <code>v3</code> for the API version number):</p>
+			<pre>http://api.nytimes.com/svc/books/{version}/lists</pre>
+			<p>However, sending a request to this URL alone does not accomplish anything; we need to make one of five types of requests that are specified <a href="http://developer.nytimes.com/docs/books_api/Books_API_Best_Sellers#h2-requests">in the documentation</a>. To perform some of these requests, we need to specify which best seller list to search through or display information about. So first, we will send a request for the names of all the best seller lists. Then, the next pages will discuss searching through a particular best seller list, and getting the best sellers for the current week.</p>
+			<h2>Requesting the Names of All Best Seller Lists</h2>
+			<p>The following code sends a request for the names of all the best seller lists:</p>
+			<pre>var bestSellersUrl = 'http://api.nytimes.com/svc/books/v3/lists';
+
+var url = bestSellersUrl + "/names";
+url += "?api-key=" + credentials.nytBooksKey;
+
+request(url, function (err, response, body) {
+	if (!err && response.statusCode < 400) {
+		context = {};
+		context.data = body;
+		res.render("data", context);
+	} else {
+		//handle error condition
+	}
+});</pre>
+			<p>This code sends a GET request to the URL for the Best Sellers API, which is appended with <code>/names</code>, to request the names of all the best seller lists. Every request also needs to contain your unique API key in a query string, so this is appended as well.<p>
+			<p>This gives the following response in the variable <code>body</code>. (I have added white space to make this easier to read, and have truncated the results.)</p>
+			<pre>{
+	"status":"OK",
+	"copyright":"Copyright (c) 2016 The New York Times Company. All Rights Reserved.",
+	"num_results":53,
+	"results":
+	[
+		{
+			"list_name":"Combined Print and E-Book Fiction",
+			"display_name":"Combined Print & E-Book Fiction",
+			"list_name_encoded":"combined-print-and-e-book-fiction",
+			"oldest_published_date":"2011-02-13",
+			"newest_published_date":"2016-03-13",
+			"updated":"WEEKLY"
+		},
+		{
+			"list_name":"Combined Print and E-Book Nonfiction",
+			"display_name":"Combined Print & E-Book Nonfiction",
+			"list_name_encoded":"combined-print-and-e-book-nonfiction",
+			"oldest_published_date":"2011-02-13",
+			"newest_published_date":"2016-03-13",
+			"updated":"WEEKLY"
+		},
+		...
+	]
+}</pre>
+			<p>The response (which is encoded in JSON by default) starts with the status and a copyright notice, and then gets into the interesting stuff. We can see by <code>"num_results":53</code> that there are 53 lists that were returned, and they are objects in an array called <code>results</code>. We can just read through all the lists here, or we can easily loop through the array of results to parse out each list name.</p>
+			<p>If we want to display a list name to the user, we can use either <code>list_name</code> or <code>display_name</code>. To use a list name in a query to retrieve more information, we need to use <code>list_name_encoded</code>. This is what we will do on the next page.</p>
+		</div>
+	</body>
+</html>
