@@ -21,9 +21,7 @@ url += "?api-key=" + credentials.nytBooksKey;
 
 request(url, function (err, response, body) {
 	if (!err && response.statusCode < 400) {
-		context = {};
-		context.data = body;
-		res.render("data", context);
+		console.log(body);
 	} else {
 		//handle error condition
 	}

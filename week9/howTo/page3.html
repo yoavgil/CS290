@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>How-To for New York Times Books API</title>
+		<link rel="stylesheet" href="stylesheet.css" type="text/css">
+	</head>
+	<body>
+		<div class="container">
+			<h1>Retrieve Results for a Best Sellers List</h1>
+			<h2>Finding Information for a Particular List</h2>
+			<p>Now that we know how to find the names of all the best seller lists, we can use one of the names to get data about a particular list. To get a particular best sellers list, we use the following GET request:</p>
+			<pre>http://api.nytimes.com/svc/books/{version}/lists/[date/]{list-name}[.response_format]?[optional-param1=value1]&[...]&api-key={your-API-key}</pre>
+			<p>The <code>list-name</code> parameter is required, but <code>date</code> parameter is optional. Other optional parameters are listed <a href="http://developer.nytimes.com/docs/books_api/Books_API_Best_Sellers#h3-list">in the documentation</a>. Since only 20 results are returned, use <code>offset</code> with a multiple of 20 to display more results beyond the first 20. Other optional parameters include <code>sort-by</code> (by default, results are sorted by best seller rank) and <code>sort-order</code> (by default, ascending). These optional parameters can easily be appended to the query string.</p>
+			<p>As an example, let's look at the top 20 results in the best sellers list called Hardcover Fiction. Here is my code to make the request:</p>
+			<pre>var bestSellersUrl = 'http://api.nytimes.com/svc/books/v3/lists';
+
+var url = bestSellersUrl + "/hardcover-fiction";
+url += "?api-key=" + credentials.nytBooksKey;
+
+request(url, function (err, response, body) {
+	if (!err && response.statusCode < 400) {
+		console.log(body);
+	} else {
+		//handle error condition
+	}
+});
+
+
+			</pre>
+			<p>And here is the response (once again formatted to make easier to read, and truncated after the first book on the list):</p>
+			<pre>{
+	"status":"OK",
+	"copyright":"Copyright (c) 2016 The New York Times Company. All Rights Reserved.",
+	"num_results":20,
+	"last_modified":"2016-03-04T13:12:31-05:00",
+	"results":
+	{
+		"list_name":"Hardcover Fiction",
+		"bestsellers_date":"2016-02-27",
+		"published_date":"2016-03-13",
+		"display_name":"Hardcover Fiction",
+		"normal_list_ends_at":16,
+		"updated":"WEEKLY",
+		"books":
+		[
+			{
+				"rank":1,
+				"rank_last_week":2,
+				"weeks_on_list":95,
+				"asterisk":0,
+				"dagger":0,
+				"primary_isbn10":"1476746583",
+				"primary_isbn13":"9781476746586",
+				"publisher":"Scribner",
+				"description":"The lives of a blind French girl and a gadget-obsessed German boy before and during World War II. \u00a0",
+				"price":0,
+				"title":"ALL THE LIGHT WE CANNOT SEE",
+				"author":"Anthony Doerr",
+				"contributor":"by Anthony Doerr",
+				"contributor_note":"",
+				"book_image":"http:\/\/du.ec2.nytimes.com.s3.amazonaws.com\/prd\/books\/9781476746586.jpg",
+				"amazon_product_url":"http:\/\/www.amazon.com\/All-Light-We-Cannot-See\/dp\/1476746583?tag=thenewyorktim-20",
+				"age_group":"",
+				"book_review_link":"",
+				"first_chapter_link":"",
+				"sunday_review_link":"http:\/\/www.nytimes.com\/2014\/05\/11\/books\/review\/all-the-light-we-cannot-see-by-anthony-doerr.html",
+				"article_chapter_link":"",
+				"isbns":
+				[
+					{
+						"isbn10":"1476746583",
+						"isbn13":"9781476746586"
+					},
+					{
+						"isbn10":"1410470229",
+						"isbn13":"9781410470225"
+					},
+					{
+						"isbn10":"1476746591",
+						"isbn13":"9781476746593"
+					},
+					{
+						"isbn10":"1501122835",
+						"isbn13":"9781501122835"
+					},
+					{
+						"isbn10":"0007548699",
+						"isbn13":"9780007548699"
+					}
+				]
+			},
+			...
+		]
+	}
+}</pre>
+			<p>These results have a LOT of information about this best sellers list, and much of it is useful or interesting. The object called <code>results</code> contains an array called <code>books</code>, which then contains an object for each of the first 20 books on the list. Each object has current and historical information on where the book stands on this best sellers list, common information about the book (title, author, desciption, etc.), as well as links to an image of the book, the book's Amazon page, and the New York Times book review or Sunday review. (If a particular field or link does not have any information, it will contain an empty string.)</p>
+			<h2>URLs and Escaped Characters</h2>
+			<p>Looking at the URLs in the response, we can see that special characters (and in particular, slashes) are escaped with a backslash character. To follow a link, these backslashes must be removed. I discovered that a simple way to do this is to call <code>JSON.parse</code> and then <code>JSON.stringify</code> on the <code>body</code> string. When parsed into an object, the backslashes are removed, and are not reinstated when converted back into a string. Here is an example:</p>
+			<pre>console.log(JSON.stringify(JSON.parse(body)));</pre>
+			<p>Note that escaped characters can also appear in other places. (You can see another escaped character in the <code>description</code> field above.) Remember to handle these escaped characters before doing anything with the data.</p>
+			<h2>About ISBNs</h2>
+			<p>An International Standard Book Number (ISBN) is given to each edition of a book. There are 10 and 13 digit versions. Because they are unique, they are very useful for finding the exact edition of a book you are looking for. You can often search for a book on Amazon by inputting only an ISBN number. As we will see, the ISBN is also useful for finding information about a specific book using the NYT Books API. In the above example, there are multiple ISBNs for different editions of the book. We will be using <code>primary_isbn10</code> to look up this book later.</p>
+		</div>
+	</body>
+</html>

@@ -24,9 +24,6 @@ app.get("/all-lists", function (req, res, next) {
 			context = {};
 			context.data = body;
 			res.render("data", context);
-
-			//context = {}
-
 		} else {
 			console.log(err);
 			if (response) {
@@ -35,7 +32,28 @@ app.get("/all-lists", function (req, res, next) {
 			next(err);
 		}
 	});
+});
 
+app.get("/fiction", function (req, res, next) {
+
+	//Get info for list named hardcover-fiction
+	var url = bestSellersUrl + "/hardcover-fiction";
+	url += "?api-key=" + credentials.nytBooksKey;
+
+	request(url, function (err, response, body) {
+		if (!err && response.statusCode < 400) {
+			//This code just displays the response body
+			context = {};
+			context.data = JSON.stringify(JSON.parse(body));
+			res.render("data", context);
+		} else {
+			console.log(err);
+			if (response) {
+				console.log(response.statusCode);
+			}
+			next(err);
+		}
+	});
 });
 
 app.get("/titles", function (req, res, next) {

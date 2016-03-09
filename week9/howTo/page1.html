@@ -27,6 +27,7 @@
 			<p>For the examples in this guide, I am using <a href="https://nodejs.org/">Node.js</a> with the <a href="http://expressjs.com/">Express</a> module. You should be familiar with JavaScript to follow along with my examples. I am also using the <a href="https://www.npmjs.com/package/request">request module</a> to send API requests. Unless you're sending your HTTP requests using another method, you must include this module with the following line:</p>
 			<pre>var request = require('request');</pre>
 			<p>Also, I have saved my NYT Books API key as a string called <code>nytBooksKey</code> in a file called <code>credentials.js</code>. I therefore access my key using <code>credentials.nytBooksKey</code>. If you define your key in the same file that you perform your API calls, you do not need to access it using <code>credentials.nytBooksKey</code>; you can access it using whatever variable you defined.</p>
+			<p>In my examples, I print the body of the HTTP responses to the console. In reality, I rendered these responses in an HTML page and viewed them in a web browser, to make them easier to display and read (using the <a href="https://www.npmjs.com/package/express-handlebars">Express-Handlebars module</a>). When you see a <code>console.log</code> line, this is usually the end of my example, and you can either display the data however you see fit, or manipulate it further to parse out the relevant information.</p>
 		</div>
 	</body>
 </html>
