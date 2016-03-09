@@ -44,7 +44,7 @@ app.get("/fiction", function (req, res, next) {
 		if (!err && response.statusCode < 400) {
 			//This code just displays the response body
 			context = {};
-			context.data = JSON.stringify(JSON.parse(body));
+			context.data = JSON.stringify(JSON.parse(body)); //removes escaped characters
 			res.render("data", context);
 		} else {
 			console.log(err);
@@ -55,6 +55,55 @@ app.get("/fiction", function (req, res, next) {
 		}
 	});
 });
+
+
+app.get("/history", function (req, res, next) {
+
+	//Get info for current best sellers lists
+	var url = bestSellersUrl + "/best-sellers/history";
+	url += "?isbn=9781476746586";
+	url += "&api-key=" + credentials.nytBooksKey;
+
+	request(url, function (err, response, body) {
+		if (!err && response.statusCode < 400) {
+			//This code just displays the response body
+			context = {};
+			context.data = body; //removes escaped characters
+			res.render("data", context);
+		} else {
+			console.log(err);
+			if (response) {
+				console.log(response.statusCode);
+			}
+			next(err);
+		}
+	});
+});
+
+
+app.get("/reviews", function (req, res, next) {
+
+	//Get info for current best sellers lists
+	var url = reviewsUrl;
+	url += "?isbn=9781476746586";
+	url += "&api-key=" + credentials.nytBooksKey;
+
+	request(url, function (err, response, body) {
+		if (!err && response.statusCode < 400) {
+			//This code just displays the response body
+			context = {};
+			context.data = body; //removes escaped characters
+			res.render("data", context);
+		} else {
+			console.log(err);
+			if (response) {
+				console.log(response.statusCode);
+			}
+			next(err);
+		}
+	});
+});
+
 
 app.get("/titles", function (req, res, next) {
 

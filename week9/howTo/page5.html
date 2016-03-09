@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>How-To for New York Times Books API</title>
+		<link rel="stylesheet" href="stylesheet.css" type="text/css">
+	</head>
+	<body>
+		<div class="container">
+			<h1>Searching for a Book Review</h1>
+			<h2>Where to Send our GET Request</h2>
+			<p>In addition to searching through best seller lists, the NYT Books API can also <a href="http://developer.nytimes.com/docs/books_api/Books_API_Book_Reviews">search for book reviews</a>. This is a different type of request, and is sent to a slightly different URL. Here is the base URL:</p>
+			<pre>http://api.nytimes.com/svc/books/{version}/reviews</pre>
+			<p>Once again, we substitute <code>v3</code> for the version number. In addition, we also need to enter a search term appended as a URL query string: either a title, author, or ISBN. The documentation recommends searching using an ISBN, because it is unabiguous. If searching via title, enter the full name (including spaces); if searching via author, enter the first and last name separated by a space. Then, you will need to substitute the spaces with <code>%20</code>, because spaces are not valid in a URL.</p>
+			<h2>Requesting a Book Review</h2>
+			<p>The following code requests book reviews using an ISBN:</p>
+			<pre>var reviewsUrl = 'http://api.nytimes.com/svc/books/v3/reviews';
+
+var url = reviewsUrl + "?isbn=9781476746586";
+url += "&api-key=" + credentials.nytBooksKey;
+
+request(url, function (err, response, body) {
+	if (!err && response.statusCode < 400) {
+		console.log(body);
+	} else {
+		//handle error condition
+	}
+});</pre>
+			<p>And here is the full response body:</p>
+			<pre>{
+	"status":"OK",
+	"copyright":"Copyright (c) 2016 The New York Times Company. All Rights Reserved.",
+	"num_results":1,
+	"results":
+	[
+		{
+			"url":"http:\/\/www.nytimes.com\/2014\/05\/11\/books\/review\/all-the-light-we-cannot-see-by-anthony-doerr.html",
+			"publication_dt":"2014-05-11",
+			"byline":"WILLIAM T. VOLLMANN",
+			"book_title":"All the Light We Cannot See",
+			"book_author":"Anthony Doerr",
+			"summary":"The paths of a blind French girl and an orphaned German boy converge in this novel set around the time of World War II.",
+			"isbn13":
+			[
+				"9780007548699",
+				"9781410470225",
+				"9781442375420",
+				"9781476746586",
+				"9781476746593",
+				"9781476746609",
+				"9781501122835"
+			]
+		}
+	]
+}</pre>
+			<p>Once again, since we searched using ISBN, <code>num_results</code> is 1, and the array <code>results</code> only contains one object. And by now, most of the data we've received should look familiar. We have the title, author, summary, and ISBNs of all editions of the book.</p>
+			<p>The first three parameters of the object inside <code>results</code> have to do specifically with the book review. We have the URL for the book review (which once again has escaped characters with backslashes), the review's publication date, and the byline (who wrote the review). If you want to link to a review for a particular book, and you know information about it (either the title, author, or ISBN), this is the simplest way to request the book review. Just remember that if you search for a title or author, you may receive more than one result, so be prepared to search or loop through the <code>results</code> array.</p>
+			<h2>Wrapping Up</h2>
+			<p>This is by no means all that can be done with the New York Times Books API. You can also retrieve best sellers lists for a particular week, or the current lists. Or, you can perform complex searches of best seller lists. You can sort results in different ways. Using the examples in this guide, you can greatly extend the functionality of the New York Times Books API, link to URLs for book reviews, link to Amazon pages, and track best seller history.</p>
+		</div>
+	</body>
+</html>

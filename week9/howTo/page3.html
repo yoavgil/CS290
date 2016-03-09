@@ -24,10 +24,7 @@ request(url, function (err, response, body) {
 	} else {
 		//handle error condition
 	}
-});
-
-
-			</pre>
+});</pre>
 			<p>And here is the response (once again formatted to make easier to read, and truncated after the first book on the list):</p>
 			<pre>{
 	"status":"OK",
@@ -100,7 +97,7 @@ request(url, function (err, response, body) {
 			<pre>console.log(JSON.stringify(JSON.parse(body)));</pre>
 			<p>Note that escaped characters can also appear in other places. (You can see another escaped character in the <code>description</code> field above.) Remember to handle these escaped characters before doing anything with the data.</p>
 			<h2>About ISBNs</h2>
-			<p>An International Standard Book Number (ISBN) is given to each edition of a book. There are 10 and 13 digit versions. Because they are unique, they are very useful for finding the exact edition of a book you are looking for. You can often search for a book on Amazon by inputting only an ISBN number. As we will see, the ISBN is also useful for finding information about a specific book using the NYT Books API. In the above example, there are multiple ISBNs for different editions of the book. We will be using <code>primary_isbn10</code> to look up this book later.</p>
+			<p>An International Standard Book Number (ISBN) is given to each edition of a book. For each edition, there are 10- and 13-digit versions of the ISBN. Because each ISBN is unique, they are very useful for finding the exact edition of a book you are looking for. For example, you can often search for a book on Amazon by inputting only an ISBN number. As we will see, the ISBN is also useful for finding information about a specific book using the NYT Books API. In the above example, there are multiple ISBNs for different editions of the book. Next, we will use one of these ISBNs to find more information about this book.</p>
 		</div>
 	</body>
 </html>

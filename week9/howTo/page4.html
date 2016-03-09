@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>How-To for New York Times Books API</title>
+		<link rel="stylesheet" href="stylesheet.css" type="text/css">
+	</head>
+	<body>
+		<div class="container">
+			<h1>Best Seller History</h1>
+			<h2>Twenty Week History for a Book</h2>
+			<p>Now that we have the ISBN of a book, let's look at some things we can do.</p>
+			<p>The NTY Books API also contains a history about best sellers, up to 20 weeks. You can search using many different parameters (which are listed <a href="http://developer.nytimes.com/docs/books_api/Books_API_Best_Sellers#h3-history">in the documentation</a>), or even with multiple such parameters by appending more than one to the query string. Once again, the results can be sorted using the <code>sort-by</code> and <code>sort-order</code> optional parameters.</p>
+			<p>Here, I will use the ISBN from the previous response (in particular, the <code>primary_isbn13</code>) to find historical best seller data for the book <cite>All the Light We Cannot See</cite>. Here is my request code:</p>
+			<pre>var bestSellersUrl = 'http://api.nytimes.com/svc/books/v3/lists';
+
+var url = bestSellersUrl + "/best-sellers/history";
+url += "?isbn=9781476746586";
+url += "&api-key=" + credentials.nytBooksKey;
+
+request(url, function (err, response, body) {
+	if (!err && response.statusCode < 400) {
+		console.log(body);
+	} else {
+		//handle error condition
+	}
+});</pre>
+			<p>And here is the response (with <code>ranks_history</code> truncated):</p>
+			<pre>{
+	"status":"OK",
+	"copyright":"Copyright (c) 2016 The New York Times Company. All Rights Reserved.",
+	"num_results":1,
+	"results":
+	[
+		{
+			"title":"ALL THE LIGHT WE CANNOT SEE",
+			"description":"The lives of a blind French girl and a gadget-obsessed German boy before and during World War II.",
+			"contributor":"by Anthony Doerr",
+			"author":"Anthony Doerr",
+			"contributor_note":"",
+			"price":0,
+			"age_group":"",
+			"publisher":"Scribner",
+			"isbns":
+			[
+				{
+					"isbn10":"1476746583",
+					"isbn13":"9781476746586"
+				},
+				{
+					"isbn10":"1410470229",
+					"isbn13":"9781410470225"
+				},
+				{
+					"isbn10":"1476746591",
+					"isbn13":"9781476746593"
+				},
+				{
+					"isbn10":"1501122835",
+					"isbn13":"9781501122835"
+				},
+				{
+					"isbn10":"0007548699",
+					"isbn13":"9780007548699"
+				}
+			],
+			"ranks_history":
+			[
+				{
+					"primary_isbn10":"1476746583",
+					"primary_isbn13":"9781476746586",
+					"rank":14,
+					"list_name":"Combined Print and E-Book Fiction",
+					"display_name":"Combined Print & E-Book Fiction",
+					"published_date":"2016-03-13",
+					"bestsellers_date":"2016-02-27",
+					"weeks_on_list":74,
+					"ranks_last_week":null,
+					"asterisk":0,
+					"dagger":0
+				},
+				{
+					"primary_isbn10":"1476746583",
+					"primary_isbn13":"9781476746586",
+					"rank":1,
+					"list_name":"Hardcover Fiction",
+					"display_name":"Hardcover Fiction",
+					"published_date":"2016-03-13",
+					"bestsellers_date":"2016-02-27",
+					"weeks_on_list":95,
+					"ranks_last_week":null,
+					"asterisk":0,
+					"dagger":0
+				},
+				{
+					"primary_isbn10":"1476746583",
+					"primary_isbn13":"9781476746586",
+					"rank":2,
+					"list_name":"Hardcover Fiction",
+					"display_name":"Hardcover Fiction",
+					"published_date":"2016-03-06",
+					"bestsellers_date":"2016-02-20",
+					"weeks_on_list":94,
+					"ranks_last_week":null,
+					"asterisk":0,
+					"dagger":0
+				},
+				...
+			],
+			"reviews":
+			[
+				{
+					"book_review_link":"",
+					"first_chapter_link":"",
+					"sunday_review_link":"http:\/\/www.nytimes.com\/2014\/05\/11\/books\/review\/all-the-light-we-cannot-see-by-anthony-doerr.html",
+					"article_chapter_link":""
+				}
+			]
+		}
+	]
+}</pre>
+			<p>Here, <code>num_results</code> is 1, which is expected, because searching by ISBN should only return one possible result. Therefore, the array <code>results</code> only has one object in it. Much of the data returned in this object is familiar from our previous request, so I will focus on the array inside this object that is called <code>ranks_history</code>.</p>
+			<p>The <code>ranks_history</code> array contains an object for each listing in a best sellers list for the past twenty weeks. Each time the book is on a best sellers list, you can see the name of that list (<code>list_name</code> and <code>display_name</code>), as well as when the list was published and created (<code>published_date</code> and <code>bestsellers_date</code>). Note that a book may appear on multiple best sellers lists in a single week, and can appear on the same list multiple weeks in a row. Using <code>rank</code> and <code>weeks_on_list</code>, you can gather data about how popular a book has been over the past twenty weeks.</p>
+		</div>
+	</body>
+</html>
