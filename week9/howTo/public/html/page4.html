@@ -7,6 +7,16 @@
 	</head>
 	<body>
 		<div class="container">
+			<div id="navigation">
+				<p>Jump to page:</p>
+				<ul>					
+					<li><a href="page1">Page 1</a><br>
+					<li><a href="page2">Page 2</a><br>
+					<li><a href="page3">Page 3</a><br>
+					<li><p>Page 4</p>
+					<li><a href="page5">Page 5</a><br>
+				</ul>
+			</div>
 			<h1>Best Seller History</h1>
 			<h2>Twenty Week History for a Book</h2>
 			<p>Now that we have the ISBN of a book, let's look at some things we can do.</p>
@@ -121,6 +131,8 @@ request(url, function (err, response, body) {
 }</pre>
 			<p>Here, <code>num_results</code> is 1, which is expected, because searching by ISBN should only return one possible result. Therefore, the array <code>results</code> only has one object in it. Much of the data returned in this object is familiar from our previous request, so I will focus on the array inside this object that is called <code>ranks_history</code>.</p>
 			<p>The <code>ranks_history</code> array contains an object for each listing in a best sellers list for the past twenty weeks. Each time the book is on a best sellers list, you can see the name of that list (<code>list_name</code> and <code>display_name</code>), as well as when the list was published and created (<code>published_date</code> and <code>bestsellers_date</code>). Note that a book may appear on multiple best sellers lists in a single week, and can appear on the same list multiple weeks in a row. Using <code>rank</code> and <code>weeks_on_list</code>, you can gather data about how popular a book has been over the past twenty weeks.</p>
+			<a href="page3" class="button" id="prev">Previous Page</a>
+			<a href="page5" class="button" id="next">Next Page</a>
 		</div>
 	</body>
 </html>

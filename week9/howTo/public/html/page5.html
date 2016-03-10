@@ -7,6 +7,16 @@
 	</head>
 	<body>
 		<div class="container">
+			<div id="navigation">
+				<p>Jump to page:</p>
+				<ul>					
+					<li><a href="page1">Page 1</a><br>
+					<li><a href="page2">Page 2</a><br>
+					<li><a href="page3">Page 3</a><br>
+					<li><a href="page4">Page 4</a><br>
+					<li><p>Page 5</p>
+				</ul>
+			</div>
 			<h1>Searching for a Book Review</h1>
 			<h2>Where to Send our GET Request</h2>
 			<p>In addition to searching through best seller lists, the NYT Books API can also <a href="http://developer.nytimes.com/docs/books_api/Books_API_Book_Reviews">search for book reviews</a>. This is a different type of request, and is sent to a slightly different URL. Here is the base URL:</p>
@@ -57,6 +67,7 @@ request(url, function (err, response, body) {
 			<p>The first three parameters of the object inside <code>results</code> have to do specifically with the book review. We have the URL for the book review (which once again has escaped characters with backslashes), the review's publication date, and the byline (who wrote the review). If you want to link to a review for a particular book, and you know information about it (either the title, author, or ISBN), this is the simplest way to request the book review. Just remember that if you search for a title or author, you may receive more than one result, so be prepared to search or loop through the <code>results</code> array.</p>
 			<h2>Wrapping Up</h2>
 			<p>This is by no means all that can be done with the New York Times Books API. You can also retrieve best sellers lists for a particular week, or the current lists. Or, you can perform complex searches of best seller lists. You can sort results in different ways. Using the examples in this guide, you can greatly extend the functionality of the New York Times Books API, link to URLs for book reviews, link to Amazon pages, and track best seller history.</p>
+			<a href="page4" class="button" id="prev">Previous Page</a>
 		</div>
 	</body>
 </html>

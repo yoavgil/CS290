@@ -7,6 +7,16 @@
 	</head>
 	<body>
 		<div class="container">
+			<div id="navigation">
+				<p>Jump to page:</p>
+				<ul>					
+					<li><a href="page1">Page 1</a><br>
+					<li><p>Page 2</p>
+					<li><a href="page3">Page 3</a><br>
+					<li><a href="page4">Page 4</a><br>
+					<li><a href="page5">Page 5</a><br>
+				</ul>
+			</div>
 			<h1>Best Seller Lists</h1>
 			<h2>Where to Send our GET Request</h2>
 			<p>To access information about best seller lists for the New York Times Books API, we need to send a GET request to the following URL (filling in <code>v3</code> for the API version number):</p>
@@ -55,6 +65,8 @@ request(url, function (err, response, body) {
 }</pre>
 			<p>The response (which is encoded in JSON by default) starts with the status and a copyright notice, and then gets into the interesting stuff. We can see by <code>"num_results":53</code> that there are 53 lists that were returned, and they are objects in an array called <code>results</code>. We can just read through all the lists here, or we can easily loop through the array of results to parse out each list name.</p>
 			<p>If we want to display a list name to the user, we can use either <code>list_name</code> or <code>display_name</code>. To use a list name in a query to retrieve more information, we need to use <code>list_name_encoded</code>. This is what we will do on the next page.</p>
+			<a href="page1" class="button" id="prev">Previous Page</a>
+			<a href="page3" class="button" id="next">Next Page</a>
 		</div>
 	</body>
 </html>

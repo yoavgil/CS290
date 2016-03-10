@@ -5,6 +5,28 @@
 	margin-right: auto;
 }
 
+#navigation {
+	font-size: 20px;
+	float: right;
+	width: 120px;
+	border: 1px solid black;
+	display: inline-block;
+	margin: 10px 20px 10px 20px;
+	padding: 10px;
+	background-color: #99c2ff;
+	border-radius: 10px;
+}
+
+#navigation ul {
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+#navigation p {
+	margin: 0px;
+}
+
 h1 {
 	font-size: 48px;
 	background-color: #ebebe0;
@@ -12,12 +34,16 @@ h1 {
 	padding: 8px;
 }
 
-h2 {
-	font-size: 36px;
+#author {
+	background-color: #ebebe0;
+	border-radius: 6px;
+	padding: 8px;
+	display: inline;
+	font-size: 24px;
 }
 
-h3 {
-	font-size: 24px;
+h2 {
+	font-size: 36px;
 }
 
 p, ul {
@@ -47,4 +73,21 @@ code {
 	background-color: #ebebe0;
 	border-radius: 4px;
 	margin: 2px;
+}
+
+.button {
+	padding: 10px 15px 10px 15px;
+	background-color: #99c2ff;
+	color: black;
+	border: 1px solid black;
+	text-decoration: none;
+	margin-bottom: 32px;
+}
+
+#prev {
+	float: left;
+}
+
+#next {
+	float: right;
 }

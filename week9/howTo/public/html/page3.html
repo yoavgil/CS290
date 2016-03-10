@@ -7,7 +7,17 @@
 	</head>
 	<body>
 		<div class="container">
-			<h1>Retrieve Results for a Best Sellers List</h1>
+			<div id="navigation">
+				<p>Jump to page:</p>
+				<ul>					
+					<li><a href="page1">Page 1</a><br>
+					<li><a href="page2">Page 2</a><br>
+					<li><p>Page 3</p>
+					<li><a href="page4">Page 4</a><br>
+					<li><a href="page5">Page 5</a><br>
+				</ul>
+			</div>
+			<h1>Retrieve Results for a Best Seller List</h1>
 			<h2>Finding Information for a Particular List</h2>
 			<p>Now that we know how to find the names of all the best seller lists, we can use one of the names to get data about a particular list. To get a particular best sellers list, we use the following GET request:</p>
 			<pre>http://api.nytimes.com/svc/books/{version}/lists/[date/]{list-name}[.response_format]?[optional-param1=value1]&[...]&api-key={your-API-key}</pre>
@@ -98,6 +108,8 @@ request(url, function (err, response, body) {
 			<p>Note that escaped characters can also appear in other places. (You can see another escaped character in the <code>description</code> field above.) Remember to handle these escaped characters before doing anything with the data.</p>
 			<h2>About ISBNs</h2>
 			<p>An International Standard Book Number (ISBN) is given to each edition of a book. For each edition, there are 10- and 13-digit versions of the ISBN. Because each ISBN is unique, they are very useful for finding the exact edition of a book you are looking for. For example, you can often search for a book on Amazon by inputting only an ISBN number. As we will see, the ISBN is also useful for finding information about a specific book using the NYT Books API. In the above example, there are multiple ISBNs for different editions of the book. Next, we will use one of these ISBNs to find more information about this book.</p>
+			<a href="page2" class="button" id="prev">Previous Page</a>
+			<a href="page4" class="button" id="next">Next Page</a>
 		</div>
 	</body>
 </html>
