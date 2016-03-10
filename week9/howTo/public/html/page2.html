@@ -21,7 +21,7 @@
 			<h2>Where to Send our GET Request</h2>
 			<p>To access information about best seller lists for the New York Times Books API, we need to send a GET request to the following URL (filling in <code>v3</code> for the API version number):</p>
 			<pre>http://api.nytimes.com/svc/books/{version}/lists</pre>
-			<p>However, sending a request to this URL alone does not accomplish anything; we need to make one of five types of requests that are specified <a href="http://developer.nytimes.com/docs/books_api/Books_API_Best_Sellers#h2-requests">in the documentation</a>. To perform some of these requests, we need to specify which best seller list to search through or display information about. So first, we will send a request for the names of all the best seller lists. Then, the next pages will discuss searching through a particular best seller list, and getting the best sellers for the current week.</p>
+			<p>However, sending a request to this URL alone does not accomplish anything; we need to make one of five types of requests that are specified <a href="http://developer.nytimes.com/docs/books_api/Books_API_Best_Sellers#h2-requests">in the documentation</a>. To perform some of these requests, we need to specify which best seller list to search through or display information about. So first, we will send a request for the names of all the best seller lists. Then, the next pages will discuss retrieving information or history about a particular best seller list.</p>
 			<h2>Requesting the Names of All Best Seller Lists</h2>
 			<p>The following code sends a request for the names of all the best seller lists:</p>
 			<pre>var bestSellersUrl = 'http://api.nytimes.com/svc/books/v3/lists';
