@@ -40,7 +40,7 @@ app.get('/reset-table',function(req,res,next){
 
 app.get("/", function (req, res, next) {
 	var context = {};
-	pool.query("SELECT * FROM workouts", function (err, row, fields) {
+	pool.query("SELECT * FROM workouts", function (err, rows, fields) {
 		if (err) {
 			next(err);
 			return;
@@ -63,7 +63,7 @@ app.post("/", function (req, res, next) {
 		});
 	}
 
-	pool.query("SELECT * FROM workouts", function (err, row, fields) {
+	pool.query("SELECT * FROM workouts", function (err, rows, fields) {
 		if (err) {
 			next(err);
 			return;
