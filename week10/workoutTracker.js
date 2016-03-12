@@ -55,7 +55,7 @@ app.post("/", function (req, res, next) {
 	var context = {};
 
 	if (req.body["createEntry"]) {
-		pool.query("INSERT INTO workouts (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?, ?, ?, ?, ?)", [req.body.name], [req.body.reps], [req.body.weight], [req.body.date], [req.body.lbs], function (err, result) {
+		pool.query("INSERT INTO workouts (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?, ?, ?, ?, ?)", [req.body.name, req.body.reps, req.body.weight, req.body.date, req.body.lbs], function (err, result) {
 			if (err) {
 				next(err);
 				return;
