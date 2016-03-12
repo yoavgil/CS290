@@ -45,6 +45,7 @@ app.get("/", function (req, res, next) {
 			next(err);
 			return;
 		}
+		console.log(rows);
 		context.results = rows;
 	});
 	res.render("workoutTracker", context);
@@ -70,6 +71,7 @@ app.post("/", function (req, res, next) {
 		}
 		context.results = rows;
 	});
+
 	res.render("workoutTracker", context);
 });
 
