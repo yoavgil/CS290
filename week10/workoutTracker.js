@@ -9,6 +9,8 @@ app.use(bodyParser.json());
 app.engine("handlebars", handlebars.engine);
 app.set("view engine", "handlebars");
 
+app.set("port", 3000);
+
 var pool = mysql.createPool({
 	host: "localhost",
 	user: "student",
@@ -53,5 +55,3 @@ app.use(function(err, req, res, next) {
 app.listen(app.get("port"), function() {
 	console.log("Express started on http://localhost:" + app.get("port") + "; press Ctrl-C to terminate.");
 });
-
-app.set("port", 3000);
