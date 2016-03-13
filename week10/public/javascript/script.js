@@ -20,7 +20,6 @@ document.getElementById("createEntry").addEventListener("click", function (event
 		date: document.getElementById("date").value,
 		lbs: document.getElementById("lbs").checked
 	};
-	
 	req.open("POST", "/", true);
 	req.setRequestHeader("Content-Type", "application/json");
 	req.addEventListener("load", function() {
@@ -33,6 +32,32 @@ document.getElementById("createEntry").addEventListener("click", function (event
 	event.preventDefault();
 });
 
+/*
+function editRow(event) {
+
+}
+*/
+
+//Sends a request to delete row by id
+function deleteRow(event) {
+	var req = new XMLHttpRequest();
+	payload = {
+		"delete": "delete",
+		"id": event.parentNode.firstChildElement.value
+	};
+	req.open("POST", "/", true);
+	req.setRequestHeader("Content-Type", "application/json");
+	req.addEventListener("load", function() {
+		if (req.status >= 200 && req.status < 400) {
+			var response = JSON.parse(req.responseText);
+			buildTable(response);
+		}
+	});
+	req.send(JSON.stringify(payload));
+	event.preventDefault();
+}
+
+//Uses response from database to build table using the DOM
 function buildTable(response) {
 	var tbody = document.getElementById("tableBody");
 	tbody.textContent = "";
@@ -57,11 +82,13 @@ function buildTable(response) {
 		edit.setAttribute("type", "submit");
 		edit.setAttribute("name", "edit");
 		edit.setAttribute("value", "Edit");
+		edit.addEventListener("click", editRow);
 
 		var del = document.createElement("input");
 		del.setAttribute("type", "submit");
 		del.setAttribute("name", "delete");
 		del.setAttribute("value", "Delete");
+		del.addEventListener("click", deleteRow);
 
 		var tableForm = document.createElement("form");
 		tableForm.appendChild(hidden);
@@ -81,9 +108,3 @@ function buildTable(response) {
 		tbody.appendChild(row);
 	});
 }
-
-/*
-document.getElementByClass("delete").addEventListener("click", function (event) {
-
-});
-*/
