@@ -1,0 +1,28 @@
+<h1>Edit Entry</h1>
+<form method="post">
+	<fieldset>
+		<legend>Edit Entry:</legend>
+		<label>Name: 
+			<input type="text" id="name" name="name" value={{name}}>
+		</label>
+		<br>
+		<label>Reps: 
+			<input type="number" id="reps" name="reps" value={{reps}}>
+		</label>
+		<br>
+		<label>Weight: 
+			<input type="number" id="weight" name="weight" value={{reps}}>
+		</label>
+		<br>
+		<label>Date (YYYY-MM-DD): 
+			<input type="text" id="date" name="date" value={{date}}>
+		</label>
+		<br>
+		<label>Pounds or Kilograms: <br>
+			<label><input type="radio" id="lbs" name="lbs" value="1" {{lbsChecked}}> Pounds</label>
+			<label><input type="radio" name="lbs" value="0" {{kgChecked}}> Kilograms</label>
+		</label>
+		<br>
+		<input type="submit" id="save" name="save" value="Save">
+	</fieldset>
+</form>

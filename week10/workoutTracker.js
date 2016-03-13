@@ -38,24 +38,12 @@ app.get('/reset-table',function(req,res,next){
 	});
 });
 
-//GET handler
+//GET handler (used to display the page)
 app.get("/", function (req, res, next) {
-	/*
-	var context = {};
-	pool.query("SELECT * FROM workouts", function (err, rows, fields) {
-		if (err) {
-			next(err);
-			return;
-		}
-		context.results = rows;
-		res.render("workoutTracker", context);
-	});
-	*/
-
 	res.render("workoutTracker");
 });
 
-//POST handler
+//POST handler (used to handle AJAX requests and send responses)
 app.post("/", function (req, res, next) {
 	var context = {};
 
@@ -71,9 +59,33 @@ app.post("/", function (req, res, next) {
 
 	//Takes user to new page to edit the selected row
 	if (req.body["edit"]) {
-		
-		//res.render
-		return; //prevents page from rendering below
+		var context = {};
+		pool.query("SELECT * FROM workouts WHERE id=?", req.body.id, function (err, rows, fields) {
+			if (err) {
+				next(err);
+				return;
+			}
+			if (rows.length == 1) {
+				context.name = rows[0].name;
+				context.reps = rows[0].reps;
+				context.weight = rows[0].weight;
+				context.date = rows[0].date;
+				if (rows[0].lbs) {
+					context.lbsChecked = "checked";
+				} else {
+					context.kgChecked = "checked";
+				}
+			}
+		})
+		res.render("editRow", context);
+		return; //prevents page from sending data below
+	}
+
+	if (req.body["save"]) {
+		//update data
+
+		res.render("workoutTracker")
+		return; //prevents page from sending data below
 	}
 
 	//Deletes the row from the database

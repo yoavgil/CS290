@@ -34,7 +34,21 @@ document.getElementById("createEntry").addEventListener("click", function (event
 
 
 function editRow(event) {
-
+	var req = new XMLHttpRequest();
+	payload = {
+		"edit": "edit",
+		"id": event.target.parentNode.firstElementChild.value
+	};
+	req.open("POST", "/", true);
+	req.setRequestHeader("Content-Type", "application/json");
+	req.addEventListener("load", function() {
+		if (req.status >= 200 && req.status < 400) {
+			var response = JSON.parse(req.responseText);
+			buildTable(response);
+		}
+	});
+	req.send(JSON.stringify(payload));
+	event.preventDefault();
 }
 
 
