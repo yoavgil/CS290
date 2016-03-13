@@ -66,6 +66,7 @@ app.post("/", function (req, res, next) {
 				return;
 			}
 			if (rows.length == 1) {
+				context.id = req.body.id;
 				context.name = rows[0].name;
 				context.reps = rows[0].reps;
 				context.weight = rows[0].weight;
@@ -82,9 +83,18 @@ app.post("/", function (req, res, next) {
 	}
 
 	if (req.body["save"]) {
-		//update data
+		pool.query("UPDATE workouts SET name=?, reps=?, weight=?, date=?, lbs=? WHERE id=?", [req.body.name, req.body.reps, req.body.weight, req.body.date, req.body.lbs, req.body.id], function (err, result) {
+			if (err) {
+				next(err);
+				return;
+			}
+		});
+		res.render("workoutTracker");
+		return; //prevents server from sending data below
+	}
 
-		res.render("workoutTracker")
+	if (req.body["cancel"]) {
+		res.render("workoutTracker");
 		return; //prevents server from sending data below
 	}
 
