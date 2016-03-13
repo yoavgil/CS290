@@ -71,7 +71,6 @@ app.post("/", function (req, res, next) {
 				context.reps = rows[0].reps;
 				context.weight = rows[0].weight;
 				context.date = rows[0].date;
-				context.date = context.date.substring(0, 10);
 				if (rows[0].lbs) {
 					context.lbsChecked = "checked";
 				} else {
