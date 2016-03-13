@@ -14,11 +14,11 @@ document.getElementById("createEntry").addEventListener("click", function (event
 	var req = new XMLHttpRequest();
 	payload = {
 		"createEntry": "createEntry",
-		name: document.getElementById("name");
-		reps: document.getElementById("reps");
-		weight: document.getElementById("weight");
-		date: document.getElementById("date");
-		lbs: document.getElementById("lbs").checked;
+		name: document.getElementById("name"),
+		reps: document.getElementById("reps"),
+		weight: document.getElementById("weight"),
+		date: document.getElementById("date"),
+		lbs: document.getElementById("lbs").checked
 	};
 	
 	req.open("POST", "/", true);
