@@ -2,30 +2,31 @@
 <form method="post">
 	<fieldset>
 		<legend>New Entry:</legend>
-		<label for="name">Name: 
-			<input type="text" name="name">
+		<label>Name: 
+			<input type="text" id="name" name="name">
 		</label>
 		<br>
-		<label for="reps">Reps: 
-			<input type="number" name="reps">
+		<label>Reps: 
+			<input type="number" id="reps" name="reps">
 		</label>
 		<br>
-		<label for="weight">Weight: 
-			<input type="number" name="weight">
+		<label>Weight: 
+			<input type="number" id="weight" name="weight">
 		</label>
 		<br>
-		<label for="date">Date (YYYY-MM-DD): 
-			<input type="text" name="date">
+		<label>Date (YYYY-MM-DD): 
+			<input type="text" id="date" name="date">
 		</label>
 		<br>
-		<label for="lbs">Pounds or Kilograms: <br>
-			<label><input type="radio" name="lbs" value="1" checked> Pounds</label>
+		<label>Pounds or Kilograms: <br>
+			<label><input type="radio" id="lbs" name="lbs" value="1" checked> Pounds</label>
 			<label><input type="radio" name="lbs" value="0"> Kilograms</label>
 		</label>
 		<br>
-		<input type="submit" name="createEntry" value="Create Entry">
+		<input type="submit" id="createEntry" name="createEntry" value="Create Entry">
 	</fieldset>
 </form>
+<!--
 {{#if results}}
 <h2>Workout Data</h2>
 <table>
@@ -37,7 +38,7 @@
 			<th>Date
 			<th>Pounds
 			<th>Edit or Delete
-	<tbody>
+	<tbody id="tableBody">
 		{{#each results}}
 		<tr>
 			<td>{{this.name}}
@@ -48,9 +49,11 @@
 			<td>
 				<form method="post">
 					<input type="hidden" name="id" value="{{this.id}}">
-					<input type="submit" name="edit" value="Edit">
-					<input type="submit" name="delete" value="Delete">
+					<input type="submit" class="edit" name="edit" value="Edit">
+					<input type="submit" class="delete" name="delete" value="Delete">
 				</form>
 		{{/each}}
 </table>
 {{/if}}
+-->
+<script src="javascript/script.js">

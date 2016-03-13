@@ -8,6 +8,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 app.engine("handlebars", handlebars.engine);
 app.set("view engine", "handlebars");
+app.use(express.static("public"));
 
 app.set("port", 3000);
 
@@ -19,7 +20,7 @@ var pool = mysql.createPool({
 });
 
 //Handler to setup database table
-//This was given with the assignment
+//This function was given with the assignment
 app.get('/reset-table',function(req,res,next){
 	var context = {};
 	pool.query("DROP TABLE IF EXISTS workouts", function(err){
@@ -37,8 +38,9 @@ app.get('/reset-table',function(req,res,next){
 	});
 });
 
-
+//GET handler
 app.get("/", function (req, res, next) {
+	/*
 	var context = {};
 	pool.query("SELECT * FROM workouts", function (err, rows, fields) {
 		if (err) {
@@ -48,12 +50,16 @@ app.get("/", function (req, res, next) {
 		context.results = rows;
 		res.render("workoutTracker", context);
 	});
+	*/
+
+	res.render("workoutTracker");
 });
 
-
+//POST handler
 app.post("/", function (req, res, next) {
 	var context = {};
 
+	//Creates new entry in database using form data
 	if (req.body["createEntry"]) {
 		pool.query("INSERT INTO workouts (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?, ?, ?, ?, ?)", [req.body.name, req.body.reps, req.body.weight, req.body.date, req.body.lbs], function (err, result) {
 			if (err) {
@@ -63,12 +69,14 @@ app.post("/", function (req, res, next) {
 		});
 	}
 
+	//Takes user to new page to edit the selected row
 	if (req.body["edit"]) {
 		
 		//res.render
 		return; //prevents page from rendering below
 	}
 
+	//Deletes the row from the database
 	if (req.body["delete"]) {
 		pool.query("DELETE FROM workouts WHERE id=?", req.body.id, function (err, result) {
 			if (err) {
@@ -78,13 +86,16 @@ app.post("/", function (req, res, next) {
 		});
 	}
 
+	//Selects the table from the database
 	pool.query("SELECT * FROM workouts", function (err, rows, fields) {
 		if (err) {
 			next(err);
 			return;
 		}
-		context.results = rows;
-		res.render("workoutTracker", context);
+		//context.results = rows;
+		//res.render("workoutTracker", context);
+		res.type("text/plain");
+		res.send(JSON.stringify(rows));
 	});
 });
 
