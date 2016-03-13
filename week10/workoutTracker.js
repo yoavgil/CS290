@@ -45,8 +45,8 @@ app.get("/", function (req, res, next) {
 			next(err);
 			return;
 		}
-		console.log(rows);
 		context.results = rows;
+		console.log(context);
 	});
 	res.render("workoutTracker", context);
 });
