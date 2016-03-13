@@ -2,10 +2,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	var req = new XMLHttpRequest();
 	req.open("POST", "/", true);
 	req.addEventListener("load", function() {
-		if (req.status >= 200 && req.status < 400) {
-			var response = JSON.parse(req.responseText);
-			buildTable(response);
-		}
+		var response = JSON.parse(req.responseText);
+		buildTable(response);
 	});
 	req.send(null);
 });
@@ -23,10 +21,8 @@ document.getElementById("createEntry").addEventListener("click", function (event
 	req.open("POST", "/", true);
 	req.setRequestHeader("Content-Type", "application/json");
 	req.addEventListener("load", function() {
-		if (req.status >= 200 && req.status < 400) {
-			var response = JSON.parse(req.responseText);
-			buildTable(response);
-		}
+		var response = JSON.parse(req.responseText);
+		buildTable(response);
 	});
 	req.send(JSON.stringify(payload));
 	document.getElementById("createEntryForm").reset();
@@ -58,10 +54,8 @@ function deleteRow(event) {
 	req.open("POST", "/", true);
 	req.setRequestHeader("Content-Type", "application/json");
 	req.addEventListener("load", function() {
-		if (req.status >= 200 && req.status < 400) {
-			var response = JSON.parse(req.responseText);
-			buildTable(response);
-		}
+		var response = JSON.parse(req.responseText);
+		buildTable(response);
 	});
 	req.send(JSON.stringify(payload));
 	event.preventDefault();
