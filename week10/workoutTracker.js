@@ -63,6 +63,21 @@ app.post("/", function (req, res, next) {
 		});
 	}
 
+	if (req.body["edit"]) {
+		
+		//res.render
+		return; //prevents page from rendering below
+	}
+
+	if (req.body["delete"]) {
+		pool.query("DELETE FROM workouts WHERE id=?", req.body.id, function (err, result) {
+			if (err) {
+				next(err);
+				return;
+			}
+		});
+	}
+
 	pool.query("SELECT * FROM workouts", function (err, rows, fields) {
 		if (err) {
 			next(err);

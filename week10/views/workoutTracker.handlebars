@@ -36,6 +36,7 @@
 			<th>Weight
 			<th>Date
 			<th>Pounds
+			<th>Edit or Delete
 	<tbody>
 		{{#each results}}
 		<tr>
@@ -44,6 +45,12 @@
 			<td>{{this.weight}}
 			<td>{{this.date}}
 			<td>{{this.lbs}}
+			<td>
+				<form method="post">
+					<input type="hidden" name="id" value="{{this.id}}">
+					<input type="submit" name="edit" value="Edit">
+					<input type="submit" name="delete" value="Delete">
+				</form>
 		{{/each}}
 </table>
 {{/if}}
