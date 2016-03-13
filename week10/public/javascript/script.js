@@ -33,17 +33,17 @@ document.getElementById("createEntry").addEventListener("click", function (event
 });
 
 
-function editRow(event, element) {
+function editRow(event) {
 
 }
 
 
 //Sends a request to delete row by id
-function deleteRow(event, element) {
+function deleteRow(event) {
 	var req = new XMLHttpRequest();
 	payload = {
 		"delete": "delete",
-		"id": element.parentNode.firstChildElement.value
+		"id": event.target.parentNode.firstElementChild.value
 	};
 	req.open("POST", "/", true);
 	req.setRequestHeader("Content-Type", "application/json");
@@ -82,17 +82,13 @@ function buildTable(response) {
 		edit.setAttribute("type", "submit");
 		edit.setAttribute("name", "edit");
 		edit.setAttribute("value", "Edit");
-		edit.addEventListener("click", function (event) {
-			editRow(event, edit);
-		});
+		edit.addEventListener("click", editRow);
 
 		var del = document.createElement("input");
 		del.setAttribute("type", "submit");
 		del.setAttribute("name", "delete");
 		del.setAttribute("value", "Delete");
-		del.addEventListener("click", function (event) {
-			deleteRow(event, del);
-		});
+		del.addEventListener("click", deleteRow);
 
 		var tableForm = document.createElement("form");
 		tableForm.appendChild(hidden);
