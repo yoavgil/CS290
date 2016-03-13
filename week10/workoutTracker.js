@@ -75,10 +75,9 @@ app.post("/", function (req, res, next) {
 				} else {
 					context.kgChecked = "checked";
 				}
-				console.log(context);
 			}
+			res.render("editRow", context);
 		});
-		res.render("editRow", context);
 		return; //prevents server from sending data below
 	}
 
