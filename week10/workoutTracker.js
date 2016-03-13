@@ -70,7 +70,7 @@ app.post("/", function (req, res, next) {
 				context.name = rows[0].name;
 				context.reps = rows[0].reps;
 				context.weight = rows[0].weight;
-				context.date = stringify(rows[0].date).substring(0, 10);
+				context.date = (JSON.stringify(rows[0].date)).substring(0, 10);
 				if (rows[0].lbs) {
 					context.lbsChecked = "checked";
 				} else {
