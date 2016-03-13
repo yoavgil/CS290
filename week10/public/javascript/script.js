@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	req.send(null);
 });
 
-document.getElementById("createEntry").addEventListener("submit", function (event) {
+document.getElementById("createEntryForm").addEventListener("submit", function (event) {
 	var req = new XMLHttpRequest();
 	payload = {
 		"createEntry": "createEntry",
