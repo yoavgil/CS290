@@ -54,14 +54,14 @@ function buildTable(response) {
 		hidden.setAttribute("value", entry.id);
 
 		var edit = document.createElement("input");
-		hidden.setAttribute("type", "submit");
-		hidden.setAttribute("name", "edit");
-		hidden.setAttribute("value", "Edit");
+		edit.setAttribute("type", "submit");
+		edit.setAttribute("name", "edit");
+		edit.setAttribute("value", "Edit");
 
 		var del = document.createElement("input");
-		hidden.setAttribute("type", "submit");
-		hidden.setAttribute("name", "delete");
-		hidden.setAttribute("value", "Delete");
+		del.setAttribute("type", "submit");
+		del.setAttribute("name", "delete");
+		del.setAttribute("value", "Delete");
 
 		var tableForm = document.createElement("form");
 		tableForm.appendChild(hidden);
