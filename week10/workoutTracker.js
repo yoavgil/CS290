@@ -75,6 +75,7 @@ app.post("/", function (req, res, next) {
 				} else {
 					context.kgChecked = "checked";
 				}
+				console.log(context);
 			}
 		})
 		res.render("editRow", context);
