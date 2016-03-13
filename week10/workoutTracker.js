@@ -45,25 +45,26 @@ app.get("/", function (req, res, next) {
 
 //POST handler (used to handle AJAX requests and send responses)
 app.post("/", function (req, res, next) {
-	var context = {};
 
 	//Creates new entry in database using form data
 	if (req.body["createEntry"]) {
-		pool.query("INSERT INTO workouts (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?, ?, ?, ?, ?)", [req.body.name, req.body.reps, req.body.weight, req.body.date, req.body.lbs], function (err, result) {
-			if (err) {
-				next(err);
-				return;
-			}
-			//Selects the table from the database
-			pool.query("SELECT * FROM workouts", function (err, rows, fields) {
+		if (req.body.name) {
+			pool.query("INSERT INTO workouts (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?, ?, ?, ?, ?)", [req.body.name, req.body.reps, req.body.weight, req.body.date, req.body.lbs], function (err, result) {
 				if (err) {
 					next(err);
 					return;
 				}
-				res.type("text/plain");
-				res.send(JSON.stringify(rows));
+				//Selects the table from the database
+				pool.query("SELECT * FROM workouts", function (err, rows, fields) {
+					if (err) {
+						next(err);
+						return;
+					}
+					res.type("text/plain");
+					res.send(JSON.stringify(rows));
+				});
 			});
-		});
+		}
 		return; //prevents server from sending data below
 	}
 
@@ -75,6 +76,7 @@ app.post("/", function (req, res, next) {
 				next(err);
 				return;
 			}
+			//Send data to populate the fields in the form
 			if (rows.length == 1) {
 				context.id = req.body.id;
 				context.name = rows[0].name;
@@ -92,14 +94,20 @@ app.post("/", function (req, res, next) {
 		return; //prevents server from sending data below
 	}
 
+	//From the edit page, saves the changes by updating the database
 	if (req.body["save"]) {
-		pool.query("UPDATE workouts SET name=?, reps=?, weight=?, date=?, lbs=? WHERE id=?", [req.body.name, req.body.reps, req.body.weight, req.body.date, req.body.lbs, req.body.id], function (err, result) {
-			if (err) {
-				next(err);
-				return;
-			}
-		});
-		res.render("workoutTracker");
+		if (req.body.name) {
+			pool.query("UPDATE workouts SET name=?, reps=?, weight=?, date=?, lbs=? WHERE id=?", [req.body.name, req.body.reps, req.body.weight, req.body.date, req.body.lbs, req.body.id], function (err, result) {
+				if (err) {
+					next(err);
+					return;
+				}
+				res.render("workoutTracker");
+			});
+		}
+		else {
+			res.render("workoutTracker");
+		}
 		return; //prevents server from sending data below
 	}
 
