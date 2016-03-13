@@ -32,23 +32,17 @@ document.getElementById("createEntry").addEventListener("click", function (event
 	event.preventDefault();
 });
 
-
+//Send request to edit row
+//(This request will cause the server to re-render the page)
 function editRow(event) {
 	var req = new XMLHttpRequest();
 	payload = {
 		"edit": "edit",
 		"id": event.target.parentNode.firstElementChild.value
 	};
-	req.open("POST", "/", true);
+	req.open("POST", "/", false);
 	req.setRequestHeader("Content-Type", "application/json");
-	req.addEventListener("load", function() {
-		if (req.status >= 200 && req.status < 400) {
-			var response = JSON.parse(req.responseText);
-			buildTable(response);
-		}
-	});
 	req.send(JSON.stringify(payload));
-	event.preventDefault();
 }
 
 
