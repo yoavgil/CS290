@@ -29,6 +29,7 @@ document.getElementById("createEntry").addEventListener("click", function (event
 		}
 	});
 	req.send(JSON.stringify(payload));
+	document.getElementById("createEntryForm").reset();
 	event.preventDefault();
 });
 
