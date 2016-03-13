@@ -105,9 +105,9 @@ app.post("/", function (req, res, next) {
 				res.render("workoutTracker");
 			});
 		}
-		else {
+		/*else {
 			res.render("workoutTracker");
-		}
+		}*/
 		return; //prevents server from sending data below
 	}
 
