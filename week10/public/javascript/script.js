@@ -84,13 +84,17 @@ function buildTable(response) {
 		edit.setAttribute("type", "submit");
 		edit.setAttribute("name", "edit");
 		edit.setAttribute("value", "Edit");
-		edit.addEventListener("click", editRow);
+		edit.addEventListener("click", function (event) {
+			editRow(event);
+		});
 
 		var del = document.createElement("input");
 		del.setAttribute("type", "submit");
 		del.setAttribute("name", "delete");
 		del.setAttribute("value", "Delete");
-		del.addEventListener("click", deleteRow);
+		del.addEventListener("click", function (event) {
+			deleteRow(event);
+		});
 
 		var tableForm = document.createElement("form");
 		tableForm.appendChild(hidden);
