@@ -18,8 +18,10 @@ document.getElementById("createEntry").addEventListener("click", function (event
 		reps: document.getElementById("reps"),
 		weight: document.getElementById("weight"),
 		date: document.getElementById("date"),
-		lbs: document.getElementById("lbs").checked
+		lbs: null
 	};
+	if (document.getElementById("lbs").checked) payload.lbs = 1;
+	else payload.lbs = 0;
 	
 	req.open("POST", "/", true);
 	req.setRequestHeader("Content-Type", "application/json");
@@ -69,6 +71,9 @@ function buildTable(response) {
 		row.appendChild(weight);
 		row.appendChild(date);
 		row.appendChild(lbs);
+		row.appendChild(hidden);
+		row.appendChild(edit);
+		row.appendChild(del);
 
 		tbody.appendChild(row);
 	});
