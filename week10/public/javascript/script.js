@@ -43,7 +43,6 @@ function editRow(event) {
 	req.open("POST", "/", false);
 	req.setRequestHeader("Content-Type", "application/json");
 	req.send(JSON.stringify(payload));
-	event.preventDefault();
 }
 
 
@@ -100,6 +99,7 @@ function buildTable(response) {
 		del.addEventListener("click", deleteRow);
 
 		var tableForm = document.createElement("form");
+		tableForm.setAttribute("method", "post");
 		tableForm.appendChild(hidden);
 		tableForm.appendChild(edit);
 		tableForm.appendChild(del);
