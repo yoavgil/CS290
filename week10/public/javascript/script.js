@@ -118,4 +118,11 @@ function buildTable(response) {
 
 		tbody.appendChild(row);
 	});
+
+	var status = document.getElementById("status");
+	if (response.length == 0) {
+		status.textContent = "There is no data to display.";
+	} else {
+		status.textContent = "";
+	}
 }
