@@ -3,6 +3,10 @@ table, th, td {
 	border-width: 1px;
 }
 
-table label {
+table input {
+	margin: 10px;
+}
+
+th, td {
 	margin: 10px;
 }

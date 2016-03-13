@@ -80,8 +80,8 @@ function buildTable(response) {
 		var date = document.createElement("td");
 		date.textContent = entry.date.substring(0, 10);
 		var lbs = document.createElement("td");
-		if (entry.lbs) lbs.textContent = "lbs";
-		else lbs.textContent = "kg";
+		if (entry.lbs) lbs.textContent = "Pounds";
+		else lbs.textContent = "Kilograms";
 
 		var hidden = document.createElement("input");
 		hidden.setAttribute("type", "hidden");
