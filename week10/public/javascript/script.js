@@ -14,14 +14,12 @@ document.getElementById("createEntry").addEventListener("click", function (event
 	var req = new XMLHttpRequest();
 	payload = {
 		"createEntry": "createEntry",
-		name: document.getElementById("name"),
-		reps: document.getElementById("reps"),
-		weight: document.getElementById("weight"),
-		date: document.getElementById("date"),
-		lbs: null
+		name: document.getElementById("name").value,
+		reps: document.getElementById("reps").value,
+		weight: document.getElementById("weight").value,
+		date: document.getElementById("date").value,
+		lbs: document.getElementById("lbs").checked
 	};
-	if (document.getElementById("lbs").checked) payload.lbs = 1;
-	else payload.lbs = 0;
 	
 	req.open("POST", "/", true);
 	req.setRequestHeader("Content-Type", "application/json");
@@ -65,15 +63,20 @@ function buildTable(response) {
 		hidden.setAttribute("name", "delete");
 		hidden.setAttribute("value", "Delete");
 
+		var tableForm = document.createElement("form");
+		tableForm.appendChild(hidden);
+		tableForm.appendChild(edit);
+		tableForm.appendChild(del);
+		var tableButtons = document.createElement("td");
+		tableButtons.appendChild(tableForm);
+
 		var row = document.createElement("tr");
 		row.appendChild(name);
 		row.appendChild(reps);
 		row.appendChild(weight);
 		row.appendChild(date);
 		row.appendChild(lbs);
-		row.appendChild(hidden);
-		row.appendChild(edit);
-		row.appendChild(del);
+		row.appendChild(tableButtons);
 
 		tbody.appendChild(row);
 	});
