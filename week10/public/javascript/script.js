@@ -43,6 +43,7 @@ function editRow(event) {
 	req.open("POST", "/", false);
 	req.setRequestHeader("Content-Type", "application/json");
 	req.send(JSON.stringify(payload));
+	event.preventDefault();
 }
 
 
