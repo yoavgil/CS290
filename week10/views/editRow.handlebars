@@ -3,7 +3,7 @@
 	<fieldset>
 		<legend>Edit Entry:</legend>
 		<label>Name: 
-			<input type="text" id="name" name="name" value={{name}}>
+			<input type="text" id="name" name="name">
 		</label>
 		<br>
 		<label>Reps: 
@@ -26,3 +26,8 @@
 		<input type="submit" id="save" name="save" value="Save">
 	</fieldset>
 </form>
+
+<script>
+	document.getElementById("name").setAttribute("value", {{name}});
+
+</script>

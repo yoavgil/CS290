@@ -58,7 +58,7 @@ app.post("/", function (req, res, next) {
 	}
 
 	//Takes user to new page to edit the selected row
-	if (req.body["edit"]) {
+	if (req.body["edit"]) {		
 		var context = {};
 		pool.query("SELECT * FROM workouts WHERE id=?", req.body.id, function (err, rows, fields) {
 			if (err) {
@@ -77,16 +77,16 @@ app.post("/", function (req, res, next) {
 				}
 				console.log(context);
 			}
-		})
+		});
 		res.render("editRow", context);
-		return; //prevents page from sending data below
+		return; //prevents server from sending data below
 	}
 
 	if (req.body["save"]) {
 		//update data
 
 		res.render("workoutTracker")
-		return; //prevents page from sending data below
+		return; //prevents server from sending data below
 	}
 
 	//Deletes the row from the database
