@@ -84,13 +84,12 @@ function buildTable(response) {
 		hidden.setAttribute("value", entry.id);
 
 		var edit = document.createElement("input");
-		edit.setAttribute("type", "button");
+		edit.setAttribute("type", "submit");
 		edit.setAttribute("name", "edit");
 		edit.setAttribute("value", "Edit");
-		/*edit.addEventListener("click", editRow);*/
 
 		var del = document.createElement("input");
-		del.setAttribute("type", "button");
+		del.setAttribute("type", "submit");
 		del.setAttribute("name", "delete");
 		del.setAttribute("value", "Delete");
 		del.addEventListener("click", deleteRow);
