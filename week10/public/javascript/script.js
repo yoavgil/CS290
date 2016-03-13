@@ -32,11 +32,11 @@ document.getElementById("createEntry").addEventListener("click", function (event
 	event.preventDefault();
 });
 
-/*
+
 function editRow(event) {
 
 }
-*/
+
 
 //Sends a request to delete row by id
 function deleteRow(event) {
@@ -45,6 +45,8 @@ function deleteRow(event) {
 		"delete": "delete",
 		"id": event.parentNode.firstChildElement.value
 	};
+	console.log(payload);
+
 	req.open("POST", "/", true);
 	req.setRequestHeader("Content-Type", "application/json");
 	req.addEventListener("load", function() {
