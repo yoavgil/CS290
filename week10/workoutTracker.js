@@ -54,7 +54,17 @@ app.post("/", function (req, res, next) {
 				next(err);
 				return;
 			}
+			//Selects the table from the database
+			pool.query("SELECT * FROM workouts", function (err, rows, fields) {
+				if (err) {
+					next(err);
+					return;
+				}
+				res.type("text/plain");
+				res.send(JSON.stringify(rows));
+			});
 		});
+		return; //prevents server from sending data below
 	}
 
 	//Takes user to new page to edit the selected row
@@ -105,7 +115,17 @@ app.post("/", function (req, res, next) {
 				next(err);
 				return;
 			}
+			//Selects the table from the database
+			pool.query("SELECT * FROM workouts", function (err, rows, fields) {
+				if (err) {
+					next(err);
+					return;
+				}
+				res.type("text/plain");
+				res.send(JSON.stringify(rows));
+			});
 		});
+		return; //prevents server from sending data below
 	}
 
 	//Selects the table from the database
@@ -114,8 +134,6 @@ app.post("/", function (req, res, next) {
 			next(err);
 			return;
 		}
-		//context.results = rows;
-		//res.render("workoutTracker", context);
 		res.type("text/plain");
 		res.send(JSON.stringify(rows));
 	});
