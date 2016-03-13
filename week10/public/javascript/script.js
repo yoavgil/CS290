@@ -32,6 +32,7 @@ document.getElementById("createEntry").addEventListener("click", function (event
 	event.preventDefault();
 });
 
+/*
 //Send request to edit row
 //(This request will cause the server to re-render the page)
 function editRow(event) {
@@ -44,7 +45,7 @@ function editRow(event) {
 	req.setRequestHeader("Content-Type", "application/json");
 	req.send(JSON.stringify(payload));
 }
-
+*/
 
 //Sends a request to delete row by id
 function deleteRow(event) {
@@ -90,7 +91,7 @@ function buildTable(response) {
 		edit.setAttribute("type", "submit");
 		edit.setAttribute("name", "edit");
 		edit.setAttribute("value", "Edit");
-		edit.addEventListener("click", editRow);
+		/*edit.addEventListener("click", editRow);*/
 
 		var del = document.createElement("input");
 		del.setAttribute("type", "submit");
