@@ -9,14 +9,10 @@ table, th, td {
 	border-width: 1px;
 }
 
-table input {
+input {
 	margin: 5px;
 }
 
 th, td {
 	padding: 5px;
-}
-
-fieldset label {
-	margin: 5px;
 }
