@@ -12,6 +12,7 @@ app.use(express.static("public"));
 
 app.set("port", 3000);
 
+//Connection pool (given in lecture)
 var pool = mysql.createPool({
 	host: "localhost",
 	user: "student",
@@ -19,8 +20,7 @@ var pool = mysql.createPool({
 	database: "student"
 });
 
-//Handler to setup database table
-//This function was given with the assignment
+//Handler to setup database table (given with the assignment)
 app.get('/reset-table',function(req,res,next){
 	var context = {};
 	pool.query("DROP TABLE IF EXISTS workouts", function(err){
@@ -94,7 +94,7 @@ app.post("/", function (req, res, next) {
 		return; //prevents server from sending data below
 	}
 
-	//From the edit page, saves the changes by updating the database
+	//From the edit page, saves the changes to the database, returns to main page
 	if (req.body["save"]) {
 		if (req.body.name) {
 			pool.query("UPDATE workouts SET name=?, reps=?, weight=?, date=?, lbs=? WHERE id=?", [req.body.name, req.body.reps, req.body.weight, req.body.date, req.body.lbs, req.body.id], function (err, result) {
@@ -111,6 +111,7 @@ app.post("/", function (req, res, next) {
 		return; //prevents server from sending data below
 	}
 
+	//From the edit page, returns to the main page
 	if (req.body["cancel"]) {
 		res.render("workoutTracker");
 		return; //prevents server from sending data below

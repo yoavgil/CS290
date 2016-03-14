@@ -1,3 +1,4 @@
+//When page is loaded, builds table
 document.addEventListener("DOMContentLoaded", function (event) {
 	var req = new XMLHttpRequest();
 	req.open("POST", "/", true);
@@ -8,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	req.send(null);
 });
 
+//When entry form is sumitted, sends POST request, reloads table
 document.getElementById("createEntryForm").addEventListener("submit", function (event) {
 	var req = new XMLHttpRequest();
 	payload = {
@@ -29,22 +31,7 @@ document.getElementById("createEntryForm").addEventListener("submit", function (
 	event.preventDefault();
 });
 
-/*
-//Send request to edit row
-//(This request will cause the server to re-render the page)
-function editRow(event) {
-	var req = new XMLHttpRequest();
-	payload = {
-		"edit": "edit",
-		"id": event.target.parentNode.firstElementChild.value
-	};
-	req.open("POST", "/", false);
-	req.setRequestHeader("Content-Type", "application/json");
-	req.send(JSON.stringify(payload));
-}
-*/
-
-//Sends a request to delete row by id
+//Sends a request to the server to delete row by id, reloads table
 function deleteRow(event) {
 	var req = new XMLHttpRequest();
 	payload = {
